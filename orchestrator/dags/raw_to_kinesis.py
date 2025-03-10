@@ -73,7 +73,7 @@ def fetch_and_send_data_to_kinesis():
 
 # Définition du DAG Airflow
 with DAG(
-    dag_id='traffic_data_ingestion',
+    dag_id='realtime_traffic_monitor_raw_to_kinesis',
     default_args=default_args,
     description="Ingestion des données de trafic en temps réel vers AWS Kinesis",
     schedule_interval='*/3 * * * *',  # Exécuter toutes les 3 minutes
