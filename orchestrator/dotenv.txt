@@ -1,0 +1,19 @@
+# API
+API_ENDPOINT="https://data.rennesmetropole.fr/api/explore/v2.1/catalog/datasets/etat-du-trafic-en-temps-reel/records?select=*&limit=100&lang=fr"
+API_URL="https://data.rennesmetropole.fr/api"
+
+# AWS
+AWS_ACCESS_KEY_ID="" # TODO
+AWS_SECRET_ACCESS_KEY="" # TODO
+AWS_REGION="" # TODO
+AWS_KINESIS_STREAM_NAME="taffic-stream" # TODO
+
+# Postgres (si vous souhaitez utiliser ces variables dans d'autres contextes)
+POSTGRES_USER="postgres_user"
+POSTGRES_PASSWORD="postgres_password"
+POSTGRES_DB="postgres_db"
+POSTGRES_HOST="postgres_host"
+
+
+AIRFLOW_IMAGE_NAME=apache/airflow:2.4.2
+AIRFLOW_UID=1000 # Most of linux primary userID. Adapt it to yours
