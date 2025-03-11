@@ -51,6 +51,8 @@ orc-env/
 .idea/
 project/
 .env
+notes/
+*notes.txt
 
 ### Airflow ###
 *logs/
