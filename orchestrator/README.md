@@ -49,7 +49,7 @@ Chaque DAG utilise un capteur HTTP ([HttpSensor](https://airflow.apache.org/docs
 1. **Cloner le dépôt :**
    ```sh
    git clone https://github.com/goamegah/realtime-traffic-monitor
-   cd realtime-traffic-monitor
+   cd realtime-traffic-monitor/orchestrator
    ```
 
 2. **Configurer les variables d'environnement :**
