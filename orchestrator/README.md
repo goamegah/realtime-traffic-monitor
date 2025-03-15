@@ -55,12 +55,10 @@ Chaque DAG utilise un capteur HTTP ([HttpSensor](https://airflow.apache.org/docs
 2. **Configurer les variables d'environnement :**
 
 Modifier orchestrator/dotenv.txt avec vos paramètres pour l'API, AWS et Postgres.
-Ajuster le fichier orchestrator/.dotenv.txt si nécessaire.
-
 
 3. **Démarrer les services :**
 ```sh
-docker-compose up -d
+docker compose up -d
 ```
 
 4. **Accéder à l'interface Airflow :** Ouvrez votre navigateur et allez sur http://localhost:8080.
@@ -69,4 +67,10 @@ Utilisez les identifiants ci-dessous par défaut pour vous connecter.
 ```dockerfile
 usr: airflow
 pwd: airflow
+```
+
+5. [Optionnel] **Arrêter les services :**
+
+```bash
+docker compose down
 ```
