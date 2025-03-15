@@ -1,6 +1,6 @@
 # Ingestion de données avec Apache Airflow
 
-Cette partie du code utilise Apache Airflow pour orchestrer l'ingestion de données issues d'une API publique. Les données récupérées peuvent être dirigées vers différents modes de stockage : ```AWS Kinesis```, un stockage ```local``` transitoire ou ```AWS S3```.
+Cette partie du code utilise Apache Airflow pour orchestrer l'ingestion de données issues d'une [API publique](https://data.rennesmetropole.fr/explore/dataset/etat-du-trafic-en-temps-reel/information/). Les données récupérées peuvent être dirigées vers différents modes de stockage : ```AWS Kinesis```, un stockage ```local``` transitoire ou ```AWS S3```.
 
 ## Configuration
 
