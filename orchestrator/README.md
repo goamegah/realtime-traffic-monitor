@@ -7,8 +7,8 @@ Cette partie du code utilise Apache Airflow pour orchestrer l'ingestion de donn�
 ### Variables d'environnement
 
 Les variables d'environnement sont définies dans les fichiers suivants :
-- [orchestrator/dotenv.txt](orchestrator/dotenv.txt) : Contient un ```TEMPLATE``` de configuration de l'API, AWS et Postgres (Stockage des données de Airflow). Renseignez le au préalable, puis renommer le fichier en ```.env```.
-- Le fichier d'environnement utilisé par Docker Compose est [orchestrator/.env](orchestrator/.env) (si présent).
+- [orchestrator/dotenv.txt](dotenv.txt) : Contient un ```TEMPLATE``` de configuration de l'API, AWS et Postgres (Stockage des données de Airflow). Renseignez le au préalable, puis renommer le fichier en ```.env```.
+- Le fichier d'environnement utilisé par Docker Compose est [orchestrator/.env](dotenv.txt) (si présent).
 
 ### Docker et Airflow
 
