@@ -74,3 +74,29 @@ pwd: airflow
 ```bash
 docker compose down
 ```
+
+### Configuration de connexion vers l'API dans l' UI Airflow
+
+1. **Accéder** au menu de connexion
+![](../assets/airflow_admin_connections.png)
+
+2. **Définisser une connexion HTTP** vers le nom de domaine du site de l'API et enrégistrer.
+![](../assets/airflow_admin_connections_api.png)
+
+3. **Visualiser vos DAGs**
+![](../assets/airflo_ui_dags_view.png)
+
+4. **Démarrer un Dags :** Exemple de raw_to_transient
+![](../assets/airflow_ui_dags_raw_to_transient.png)
+
+#### **/!\ Point de vigilance**
+Dans le cas des dags :
+- **raw_to_s3**, assurer vous d'avoir votre compartiment S3 disponible ainsi que vos clés AWS
+- **raw_to_kinesis** assurez-vous d'avoir d'avoir déjà créer au préalable votre espace Kinesis (kafka managé d'AWS) ```Kinesis stream```. Dans ce code ce espace est nommé **taffic_stream** comme définis dans les variable d'environnement ```.env```. 
+
+5. Au bout de quelques minutes vous devriez voir apparaitre en local dans le dossier ```orchestrator/data``` vos données au format JSON
+```[filename]_[timestamps].json```. 
+
+
+
+

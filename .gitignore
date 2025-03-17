@@ -53,6 +53,7 @@ project/
 .env
 notes/
 *notes.txt
+apps/
 
 ### Airflow ###
 *logs/
