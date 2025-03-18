@@ -46,6 +46,12 @@ build/
 ### Scala ###
 .bsp/
 
+### Airflow ###
+*logs/
+*plugins/
+*__pycache__/
+*data/
+
 ### local ###
 orc-env/
 .idea/
@@ -54,9 +60,4 @@ project/
 notes/
 *notes.txt
 apps/
-
-### Airflow ###
-*logs/
-*plugins/
-*__pycache__/
-*data/
+tools/
