@@ -62,7 +62,7 @@ object TrafficStreamProcessor {
         println(s"[<->] Batch $batchId - $count lignes")
 
         if (count == 0) {
-          println(s"[/!\] Batch $batchId vide - rien à insérer.")
+          println(s"[/!\\] Batch $batchId vide - rien à insérer.")
         } else {
           println("[CHECK] Échantillon du batch reçu :")
           batchDF.show(5, truncate = false)
@@ -81,7 +81,7 @@ object TrafficStreamProcessor {
             }
           } catch {
             case e: Exception =>
-              println(s"[/!\] Erreur lors du traitement du batch $batchId : ${e.getMessage}")
+              println(s"[/!\\] Erreur lors du traitement du batch $batchId : ${e.getMessage}")
               e.printStackTrace()
           }
         }

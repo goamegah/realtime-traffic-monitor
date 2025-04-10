@@ -18,22 +18,23 @@ object DBSchemaManager {
     try {
       val stmt = conn.createStatement()
       stmt.execute(sql)
-      println(s"[✔] Script exécuté : $filePath")
+      println(s"[OK] Script exécuté : $filePath")
     } catch {
       case ex: Exception =>
-        println(s"[❌] Erreur d’exécution pour $filePath : ${ex.getMessage}")
+        println(s"[/!\\] Erreur d’exécution pour $filePath : ${ex.getMessage}")
     } finally {
       conn.close()
     }
   }
 
   def init(): Unit = {
-    println("[🛠] Initialisation du schéma PostgreSQL...")
+    println("[...] Initialisation du schéma PostgreSQL...")
 
     executeSqlFile("ddl/tables/create_traffic_stream.sql")
     executeSqlFile("ddl/views/create_view_traffic_status_latest.sql")
+    executeSqlFile("ddl/views/create_view_traffic_stats_per_minute.sql")
 
-    println("[✅] Schéma PostgreSQL initialisé avec succès.")
+    println("[#] Schéma PostgreSQL initialisé avec succès.")
   }
 }
 

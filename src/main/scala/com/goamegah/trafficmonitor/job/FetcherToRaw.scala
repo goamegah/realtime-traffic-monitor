@@ -16,7 +16,7 @@ object FetcherToRaw {
         LocalStorage.store(json, prefix = "raw")
         println("[OK] Données stockées dans raw/")
       case None =>
-        println("[X] Aucune donnée reçue de l'API.")
+        println("[/!\\] Aucune donnée reçue de l'API.")
     }
   }
 }

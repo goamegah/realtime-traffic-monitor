@@ -8,23 +8,23 @@ object TrafficTransformer {
   def transform(inputDF: DataFrame)(implicit spark: SparkSession): DataFrame = {
     import spark.implicits._
 
-    println("[🔧] Étape 1 - Données brutes (streaming)")
+    println("[#] Étape 1 - Données brutes (streaming)")
     inputDF.printSchema()
-    // 🚫 .count() interdit en streaming
-    // 🚫 .show() interdit en streaming
+    // /!\ .count() interdit en streaming
+    // /!\ .show() interdit en streaming
 
     // Étape 2 - Explosion du champ `results`
     val explodedDF = inputDF
       .filter(col("results").isNotNull && size(col("results")) > 0)
       .withColumn("result", explode(col("results")))
 
-    println("[🧨] Étape 2 - Après explosion de 'results'")
+    println("[#] Étape 2 - Après explosion de 'results'")
     explodedDF.printSchema()
 
     // Étape 3 - Sélection des colonnes utiles
     val selectedDF = explodedDF.selectExpr("result.*")
 
-    println("[📊] Étape 3 - Après sélection des champs")
+    println("[#] Étape 3 - Après sélection des champs")
     selectedDF.printSchema()
 
     // Étape 4 - Transformation : ajout lat/lon et filtrage
@@ -34,7 +34,7 @@ object TrafficTransformer {
       .drop("geo_point_2d")
       .filter(col("datetime").isNotNull)
 
-    println("[🧼] Étape 4 - Après nettoyage/filtrage final")
+    println("[#] Étape 4 - Après nettoyage/filtrage final")
     transformedDF.printSchema()
 
     transformedDF

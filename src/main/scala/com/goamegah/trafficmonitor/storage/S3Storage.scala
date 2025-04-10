@@ -88,7 +88,7 @@ object S3Storage extends StorageBackend {
       .build()
     val result = s3Client.listObjectsV2(request)
     val files = result.contents().asScala.map(_.key())
-    println(s"[📦] Fichiers dans S3 ($prefix):")
+    println(s"[#] Fichiers dans S3 ($prefix):")
     files.foreach(k => println(s" - $k"))
   }
 

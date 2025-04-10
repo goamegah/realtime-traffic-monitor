@@ -24,6 +24,6 @@ object PostgresLoader {
       .mode(mode)
       .jdbc(jdbcUrl, tableName, properties)
 
-    println(s"[✔] Données insérées dans PostgreSQL -> table '$tableName'")
+    println(s"[#] Données insérées dans PostgreSQL -> table '$tableName'")
   }
 }
