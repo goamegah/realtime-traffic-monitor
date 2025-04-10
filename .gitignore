@@ -61,3 +61,5 @@ notes/
 *notes.txt
 apps/
 tools/
+*local.conf
+docker/
