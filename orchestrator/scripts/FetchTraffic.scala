@@ -6,7 +6,8 @@ import scalaj.http._
 
 object FetchTraffic {
   def main(args: Array[String]): Unit = {
-    val apiUrl = "https://data.opendatasoft.com/api/explore/v2.1/catalog/datasets/velib-disponibilite-en-temps-reel@parisdata/records?limit=100"
+    val apiUrl = "https://data.rennesmetropole.fr/api/explore/v2.1/catalog/datasets/etat-du-trafic-en-temps-reel/records?limit=100"
+
     val response = Try(Http(apiUrl).asString.body)
 
     response match {
