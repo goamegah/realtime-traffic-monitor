@@ -2,3 +2,6 @@ apache-airflow==2.6.0
 apache-airflow-providers-http
 boto3
 requests
+streamlit
+plotly
+dash
