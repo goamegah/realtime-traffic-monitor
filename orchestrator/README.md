@@ -14,7 +14,7 @@ Les variables d'environnement sont définies dans les fichiers suivants :
 
 Le projet utilise Docker pour lancer l'environnement Airflow. La configuration se fait à l'aide des fichiers suivants :
 - [orchestrator/Dockerfile](Dockerfile) : Définit l'image Docker basée sur `apache/airflow:2.6.0` et copie les DAGs ainsi que les dépendances.
-- [orchestrator/docker-compose.yaml](docker-compose.yaml) : Configure les services Airflow, PostgreSQL et Redis, et monte les volumes nécessaires pour les DAGs, les logs, et les plugins.
+- [orchestrator/docker-compose.yml](docker-compose.yaml) : Configure les services Airflow, PostgreSQL et Redis, et monte les volumes nécessaires pour les DAGs, les logs, et les plugins.
 
 ### Dépendances
 
@@ -47,6 +47,9 @@ Chaque DAG utilise un capteur HTTP ([HttpSensor](https://airflow.apache.org/docs
 ### Étapes d'installation
 
 1. **Cloner le dépôt :**
+
+
+   
    ```sh
    git clone https://github.com/goamegah/realtime-traffic-monitor
    cd realtime-traffic-monitor/orchestrator
@@ -57,8 +60,16 @@ Chaque DAG utilise un capteur HTTP ([HttpSensor](https://airflow.apache.org/docs
 Modifier orchestrator/dotenv.txt avec vos paramètres pour l'API, AWS et Postgres.
 
 3. **Démarrer les services :**
+avant ça: 
+J’ai tenté d’installer sbt directement dans Docker, mais c’était galère avec les clés GPG et les dépôts qui plantaient. Du coup, le plus simple : installez sbt en local sur votre machine, et Airflow l’utilisera depuis là:
+
+-curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install sbt
+
+
 ```sh
-docker compose up -d
+docker compose up -d --build
 ```
 
 4. **Accéder à l'interface Airflow :** Ouvrez votre navigateur et allez sur http://localhost:8080.
