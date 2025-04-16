@@ -59,8 +59,8 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      - ./streamlit_dash_app:/app
-      - ./data:/app/data
+      - ./streamlit_dash_app:/apps
+      - ./data:/apps/data
     restart: always
 
   plotly-dash:
@@ -70,9 +70,9 @@ services:
     ports:
       - "8050:8050"
     volumes:
-      - ./plotly_dash_app:/app
-      - ./data:/app/data
-    command: [ "python", "app.py" ]
+      - ./plotly_dash_app:/apps
+      - ./data:/apps/data
+    command: [ "python", "apps.py" ]
     restart: always
 
 
@@ -123,7 +123,7 @@ services:
     healthcheck:
       test:
         - "CMD-SHELL"
-        - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
+        - 'celery --apps airflow.executors.celery_executor.apps inspect ping -d "celery@$${HOSTNAME}"'
       interval: 10s
       timeout: 10s
       retries: 5
