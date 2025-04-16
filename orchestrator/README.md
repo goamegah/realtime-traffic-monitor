@@ -82,7 +82,10 @@ pwd: airflow
 5. **Accéder à l'application Streamlit :**
 Ouvrez votre navigateur et allez sur http://localhost:8501 pour accéder à l'interface de l'application Streamlit.
 
-6. [Optionnel] **Arrêter les services :**
+6. **Accéder à l'application Plotly Dash :**
+Ouvrez votre navigateur et allez sur http://localhost:8050 pour accéder à l'interface de l'application Plotly Dash.
+
+7. [Optionnel] **Arrêter les services :**
 
 ```bash
 docker compose down
