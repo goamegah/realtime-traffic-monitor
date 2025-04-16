@@ -75,6 +75,9 @@ docker compose up -d --build
 4. **Accéder à l'interface Airflow :** Ouvrez votre navigateur et allez sur http://localhost:8080.
 Utilisez les identifiants ci-dessous par défaut pour vous connecter.
 
+5. **Accéder à l'application Streamlit :**
+Ouvrez votre navigateur et allez sur http://localhost:8501 pour accéder à l'interface de l'application Streamlit.
+
 ```dockerfile
 usr: airflow
 pwd: airflow
