@@ -33,14 +33,19 @@ object PostgresLoader {
         .mode(mode)
         .jdbc(jdbcUrl, tableName, properties)
 
-      logger.info(s"[✅] Insertion réussie dans '$tableName' (${df.count()} lignes)")
+      logger.info(s"[OK => ] Insertion réussie dans '$tableName' (${df.count()} lignes)")
 
     } catch {
       case e: Exception =>
-        logger.error(s"[❌] Erreur lors de l'insertion dans '$tableName' : ${e.getMessage}", e)
+        logger.error(s"[/!\\] Erreur lors de l'insertion dans '$tableName' : ${e.getMessage}", e)
     }
   }
 
+    /** Charge un DataFrame dans une table PostgreSQL en écrasant les données existantes
+     *
+     * @param df        Le DataFrame à charger
+     * @param tableName Nom de la table cible
+     */
   def overwriteLoad(df: DataFrame, tableName: String)(implicit spark: SparkSession): Unit = {
     val jdbcUrl = AppConfig.Postgres.jdbcUrl
     val conn = java.sql.DriverManager.getConnection(jdbcUrl, AppConfig.Postgres.user, AppConfig.Postgres.password)
@@ -48,10 +53,10 @@ object PostgresLoader {
     try {
       val stmt = conn.createStatement()
       stmt.execute(s"TRUNCATE TABLE $tableName")
-      logger.info(s"[🔁] Table '$tableName' vidée avec succès (TRUNCATE)")
+      logger.info(s"[OK] Table '$tableName' vidée avec succès (TRUNCATE)")
     } catch {
       case e: Exception =>
-        logger.error(s"[❌] Erreur lors du TRUNCATE de '$tableName' : ${e.getMessage}")
+        logger.error(s"[/!\\] Erreur lors du TRUNCATE de '$tableName' : ${e.getMessage}")
     } finally {
       conn.close()
     }
