@@ -57,7 +57,7 @@ with DAG(
     dag_id='realtime_traffic_monitor_fetcher_to_raw',
     default_args=default_args,
     description="Ingestion des données de trafic et stockage en local",
-    schedule_interval='*/3 * * * *',  # Exécuter toutes les 3 minutes
+    schedule_interval='*/1 * * * *',  # Exécuter toutes les 1 minutes
     catchup=False
 ) as dag:
 
