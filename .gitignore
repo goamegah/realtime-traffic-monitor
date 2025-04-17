@@ -63,3 +63,5 @@ apps/
 tools/
 *local.conf
 docker/
+scripts
+ui-env/
