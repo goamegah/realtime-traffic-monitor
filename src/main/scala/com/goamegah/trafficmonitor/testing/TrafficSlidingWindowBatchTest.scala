@@ -1,10 +1,13 @@
 package com.goamegah.trafficmonitor.testing
 
+import com.goamegah.trafficmonitor.db.DBSchemaManager.getClass
 import com.goamegah.trafficmonitor.streaming.TrafficTransformer
 import com.goamegah.trafficmonitor.processing.TrafficStatsAggregator
 import org.apache.spark.sql.SparkSession
+import org.slf4j.LoggerFactory
 
 object TrafficSlidingWindowBatchTest {
+  private val logger = LoggerFactory.getLogger(getClass)
   def main(args: Array[String]): Unit = {
     implicit val spark: SparkSession = SparkSession.builder()
       .appName("TrafficSlidingWindowBatchTest")
@@ -25,13 +28,13 @@ object TrafficSlidingWindowBatchTest {
 
     // Appliquer la transformation
     val transformedDF = TrafficTransformer.transform(rawDF)(spark)
-    println("[🎯] Résultat final après transformation:")
+    logger.info("[OK] Résultat final après transformation:")
     transformedDF.printSchema()
     transformedDF.show(10, truncate = false)
 
     // Appeler l'agrégation par sliding window (l'implicit spark est désormais disponible)
     val slidingDF = TrafficStatsAggregator.aggregateBySlidingWindow(transformedDF)
-    println("[⏱] Résultat de l'agrégation par sliding window:")
+    logger.info("[⏱] Résultat de l'agrégation par sliding window:")
     slidingDF.printSchema()
     slidingDF.show(10, truncate = false)
 
