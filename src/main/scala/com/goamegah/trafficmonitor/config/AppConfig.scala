@@ -15,10 +15,10 @@ object AppConfig {
   }
 
   object AWS {
-    val accessKey: String = config.getString("aws.IAM_ACCESS_KEY_ID")
-    val secretKey: String = config.getString("aws.IAM_SECRET_ACCESS_KEY")
+    val accessKey: String = config.getString("aws.iam.IAM_ACCESS_KEY_ID")
+    val secretKey: String = config.getString("aws.iam.IAM_SECRET_ACCESS_KEY")
     val region: String = config.getString("aws.REGION")
-    val rawBucket: String = config.getString("aws.S3_RAW_BUCKET_URI")
+    val rawBucket: String = config.getString("aws.s3.S3_RAW_BUCKET_URI")
     //val curatedBucket: String = config.getString("aws.S3_CURATED_BUCKET_URI")
     //val checkpointBucket: String = config.getString("aws.S3_CHECKPOINT_BUCKET_URI")
   }
@@ -57,6 +57,9 @@ object AppConfig {
     val slidingWindowSlideMillis: Long = Duration(slidingWindowSlide).toMillis
     val checkpointDir: String = config.getString("streaming.checkpointDir")
     val triggerInterval: String = config.getString("streaming.triggerInterval")
-    val useSlidingWindow: Boolean = config.getBoolean("streaming.useSlidingWindow")
+    val enableSlidingWindow: Boolean = config.getBoolean("streaming.enableSlidingWindow")
+    val enableHourlyAggregation: Boolean = config.getBoolean("streaming.enableHourlyAggregation")
+    val enableMinuteAggregation: Boolean = config.getBoolean("streaming.enableMinuteAggregation")
+
   }
 }
