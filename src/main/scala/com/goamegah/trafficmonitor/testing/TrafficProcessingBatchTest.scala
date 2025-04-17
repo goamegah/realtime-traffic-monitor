@@ -15,7 +15,7 @@ object TrafficProcessingBatchTest {
     import spark.implicits._
 
     // -> Choisis un fichier JSON réel
-    val inputPath = "services/orchestrator/data/raw/20250409010002792155.json"
+    val inputPath = "services/orchestrator/data/raw/20250410224802655208.json"
     val df = spark.read
       .option("multiLine", true)
       .json(inputPath)
