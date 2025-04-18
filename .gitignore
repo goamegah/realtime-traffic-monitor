@@ -59,7 +59,6 @@ project/
 .env
 notes/
 *notes.txt
-apps/
 tools/
 *local.conf
 scripts
