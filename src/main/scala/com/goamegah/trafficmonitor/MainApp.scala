@@ -7,10 +7,10 @@ object MainApp {
   def main(args: Array[String]): Unit = {
 
     // Initialisation du schéma PostgreSQL
-    DBSchemaManager.init()
+    //DBSchemaManager.init()
 
     // Démarrage du streaming
-    TrafficStreamProcessor.start()
+    //TrafficStreamProcessor.start()
 
     // Arrêt du streaming après 5 minutes
     // Thread.sleep(5 * 60 * 1000) // 5 minutes
