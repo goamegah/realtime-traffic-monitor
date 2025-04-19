@@ -62,4 +62,5 @@ notes/
 apps/
 tools/
 scripts/
-local.conf
+*local.conf
+
