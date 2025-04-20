@@ -44,12 +44,12 @@ object DBSchemaManager {
 
     try {
       // Exécution des tables
-      executeSqlFile("ddl/tables/create_road_traffic_stats_minute.sql")
-      executeSqlFile("ddl/tables/create_road_traffic_stats_hour.sql")
-      executeSqlFile("ddl/tables/create_road_traffic_stats_sliding_window.sql")
+      executeSqlFile("database/ddl/tables/create_road_traffic_stats_minute.sql")
+      executeSqlFile("database/ddl/tables/create_road_traffic_stats_hour.sql")
+      executeSqlFile("database/ddl/tables/create_road_traffic_stats_sliding_window.sql")
 
       // Exécution des vues
-      val viewDir = new File("ddl/views/")
+      val viewDir = new File("database/ddl/views/")
       if (viewDir.exists && viewDir.isDirectory) {
         val viewFiles = viewDir.listFiles().filter(_.getName.endsWith(".sql")).sorted
         viewFiles.foreach(view => executeSqlFile(view.getPath))
@@ -67,7 +67,7 @@ object DBSchemaManager {
     println("[...] Nettoyage du schéma PostgreSQL...")
     implicit val conn: Connection = getConnection()
     try {
-      executeSqlFile("ddl/cleanup/drop_all.sql")
+      executeSqlFile("database/ddl/cleanup/drop_all.sql")
       logger.info("[OK] Schéma PostgreSQL nettoyé.")
     } finally {
       conn.close()

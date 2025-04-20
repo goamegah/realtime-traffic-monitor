@@ -6,20 +6,20 @@ import altair as alt
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
 from dataloader.data_loader import get_db_engine
-from dataloader.queries import get_available_road_names, get_period_bounds_query, get_traffic_history_query
+from dataloader import get_available_road_names, get_period_bounds_query, get_traffic_history_query
 
 st.set_page_config(page_title="📊 Traffic History", layout="wide")
 st.title("📊 Traffic Evolution History")
 
-# 🔄 Rafraîchissement automatique toutes les 60 secondes
+# Rafraîchissement automatique toutes les 60 secondes
 st_autorefresh(interval=60 * 1000, key="history_refresh")
 
 engine = get_db_engine()
 
-# 📌 Choix de la résolution temporelle
+# Choix de la résolution temporelle
 resolution = st.radio("⏱️ Temporal Resolution", ["minute", "hour"], horizontal=True)
 
-# 📌 Sélection persistante du nom de route
+# Sélection persistante du nom de route
 if "selected_road" not in st.session_state:
     st.session_state.selected_road = get_available_road_names(engine, resolution)[0]
 
@@ -30,7 +30,7 @@ road_name = st.selectbox(
     key="selected_road"
 )
 
-# 📌 Bornes temporelles pour les sliders
+# Bornes temporelles pour les sliders
 @st.cache_data(ttl=60)
 def get_period_bounds(resolution, road_name):
     query = get_period_bounds_query(resolution)
@@ -43,14 +43,14 @@ if min_period == max_period:
     st.warning("⚠️ Pas assez de données pour cette route et cette résolution.")
     st.stop()
 
-# 📅 Sliders dans une disposition horizontale
+# Sliders dans une disposition horizontale
 col_start, col_end = st.columns(2)
 with col_start:
     start_date = st.slider("📅 Start", min_value=min_period, max_value=max_period, value=min_period, format="YYYY-MM-DD HH:mm")
 with col_end:
     end_date = st.slider("📅 End", min_value=min_period, max_value=max_period, value=max_period, format="YYYY-MM-DD HH:mm")
 
-# 📌 Chargement des données filtrées
+# hargement des données filtrées
 @st.cache_data(ttl=30)
 def load_traffic_data(resolution, road_name, start_date, end_date):
     query = get_traffic_history_query(resolution)
@@ -66,7 +66,7 @@ if df.empty:
     st.warning("⚠️ Aucune donnée disponible pour les filtres choisis.")
     st.stop()
 
-# 📊 KPI
+# KPI
 kpi_speed = df["average_speed"].mean()
 kpi_travel_time = df["average_travel_time"].mean()
 max_speed = df["average_speed"].max()
@@ -79,7 +79,7 @@ col2.metric("⏱️ Temps moyen trajet", f"{kpi_travel_time:.2f} min")
 col3.metric("📈 Vitesse max", f"{max_speed:.2f} km/h", delta=f"{(max_speed - kpi_speed):+.2f}")
 col4.metric("📉 Vitesse min", f"{min_speed:.2f} km/h", delta=f"{(min_speed - kpi_speed):+.2f}")
 
-# 📉 Graphiques côte à côte
+# Graphiques côte à côte
 st.markdown("## 📊 Évolution temporelle (vitesse & temps trajet)")
 col_speed, col_travel = st.columns(2)
 
@@ -111,6 +111,6 @@ with col_travel:
         use_container_width=True
     )
 
-# 🗃️ Données brutes
+# Données brutes
 with st.expander("🔍 Voir les données brutes"):
     st.dataframe(df, use_container_width=True)

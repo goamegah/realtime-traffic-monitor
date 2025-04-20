@@ -9,12 +9,12 @@ from dataloader.data_loader import get_db_engine
 st.set_page_config(page_title="🏠 Home - Traffic Overview", layout="wide")
 st.title("🏠 Traffic Monitoring Dashboard")
 
-# 🔄 Auto-refresh every 60 seconds
+# Auto-refresh every 60 seconds
 st_autorefresh(interval=60 * 1000, key="home_refresh")
 
 engine = get_db_engine()
 
-# 📌 Load latest map features (only latest period)
+# Load latest map features (only latest period)
 @st.cache_data(ttl=30)
 def load_home_data():
     query = """
@@ -30,7 +30,7 @@ if df.empty:
     st.warning("⚠️ Aucune donnée disponible pour l'instant.")
     st.stop()
 
-# 📊 KPIs
+# KPIs
 nb_segments = len(df)
 nb_routes = df["road_name"].nunique()
 status_dominant = df["traffic_status"].mode()[0]
@@ -41,7 +41,7 @@ col1.metric("🧩 Tronçons total", nb_segments)
 col2.metric("🛣️ Routes différentes", nb_routes)
 col3.metric("🚦 Statut dominant", status_dominant)
 
-# 📊 Répartition par statut de trafic
+# Répartition par statut de trafic
 st.markdown("## 🚦 Répartition des statuts de trafic")
 status_counts = df["traffic_status"].value_counts().reset_index()
 status_counts.columns = ["traffic_status", "count"]
@@ -58,6 +58,6 @@ chart = alt.Chart(status_counts).mark_bar().encode(
 
 st.altair_chart(chart, use_container_width=True)
 
-# 🗃️ Données tabulaires optionnelles
+# Données tabulaires optionnelles
 with st.expander("🔍 Voir les données brutes"):
     st.dataframe(df, use_container_width=True)
