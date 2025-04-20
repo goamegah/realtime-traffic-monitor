@@ -59,8 +59,8 @@ project/
 .env
 notes/
 *notes.txt
-apps/
 tools/
-scripts/
 *local.conf
+scripts
+ui-env/
 
