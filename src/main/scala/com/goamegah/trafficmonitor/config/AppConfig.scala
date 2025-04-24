@@ -40,16 +40,6 @@ object AppConfig {
     val dataDir: String = config.getString("local.LOCAL_STORAGE_DIR")
   }
 
-  /*
-  streaming {
-  slidingWindow {
-    duration = "5 minutes"
-    slide = "1 minute"
-  }
-
-}
-  * */
-
   object Streaming {
     val slidingWindowDuration: String = config.getString("streaming.slidingWindow.duration")
     val slidingWindowSlide: String = config.getString("streaming.slidingWindow.slide")

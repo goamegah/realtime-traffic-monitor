@@ -124,7 +124,6 @@ object TrafficStreamProcessor {
                             PostgresLoader.load(sliding, "road_traffic_stats_sliding_window")
                         }
 
-
                     } catch {
                         case e: Exception =>
                             logger.error(s"/!\\ Erreur lors du traitement du batch $batchId : ${e.getMessage}")
