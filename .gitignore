@@ -62,5 +62,4 @@ notes/
 tools/
 *local.conf
 scripts
-ui-env/
-
+ui_env/

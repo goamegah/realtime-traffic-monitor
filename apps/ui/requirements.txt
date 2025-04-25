@@ -1,7 +1,8 @@
 streamlit
 streamlit-folium
-streamlit-autorefresh
 sqlalchemy
 psycopg2-binary
 altair
 pandas
+streamlit-autorefresh
+python-dotenv
