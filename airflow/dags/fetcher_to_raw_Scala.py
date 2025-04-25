@@ -34,7 +34,7 @@ def fetch_data_via_scala():
 
 # Définition du DAG Airflow
 with DAG(
-    dag_id='realtime_traffic_monitor_raw_to_transient_with_scala',
+    dag_id='realtime_traffic_monitor_fetcher_to_raw_scala',
     default_args=default_args,
     description="Ingestion des données de trafic et stockage en local",
     schedule_interval='*/3 * * * *',  # Exécuter toutes les 3 minutes
