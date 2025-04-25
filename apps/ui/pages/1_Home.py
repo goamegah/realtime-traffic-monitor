@@ -61,3 +61,47 @@ st.altair_chart(chart, use_container_width=True)
 # Données tabulaires optionnelles
 with st.expander("🔍 Voir les données brutes"):
     st.dataframe(df, use_container_width=True)
+
+
+# Load speed data for boxplots
+@st.cache_data(ttl=30)
+def load_speed_data():
+    # Use a simpler query without NOW() function
+    query = """
+        SELECT traffic_status, avg_speed
+        FROM traffic_status_avg_speed
+    """
+    return pd.read_sql(query, engine)
+
+# Try to load speed data, but handle any errors
+try:
+    speed_df = load_speed_data()
+    has_speed_data = not speed_df.empty
+except Exception as e:
+    st.error(f"Erreur lors du chargement des données de vitesse: {str(e)}")
+    has_speed_data = False
+    speed_df = pd.DataFrame()
+
+
+# Boxplots de vitesse moyenne par statut de trafic
+if has_speed_data:
+    st.markdown("## 🚗 Distributions des vitesses moyennes par statut de trafic à regrouper par Vitesse_Maxi")
+
+    # Create boxplot with Altair
+    boxplot = alt.Chart(speed_df).mark_boxplot().encode(
+        x=alt.X("traffic_status:N", title="Statut de trafic"),
+        y=alt.Y("avg_speed:Q", title="Vitesse moyenne (km/h)"),
+        color=alt.Color("traffic_status", legend=None)
+    ).properties(
+        width='container',
+        height=400,
+        title="🚗 Distribution des vitesses par statut de trafic"
+    )
+
+
+
+st.altair_chart(boxplot, use_container_width=True)
+
+# Données tabulaires optionnelles
+with st.expander("🔍 Voir les données brutes"):
+    st.dataframe(speed_df, use_container_width=True)

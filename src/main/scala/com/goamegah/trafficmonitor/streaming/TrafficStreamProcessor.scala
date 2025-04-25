@@ -106,6 +106,16 @@ object TrafficStreamProcessor {
 
                     try {
 
+                        // Vtesse moyenne par trafficstatus
+                        val avgSpeedByStatus = batchDF
+                          .groupBy("traffic_status")
+                          .agg(
+                              org.apache.spark.sql.functions.avg("average_speed").as("avg_speed"),
+                              org.apache.spark.sql.functions.count(org.apache.spark.sql.functions.lit(1)).as("record_count")
+                          )
+                          .orderBy("traffic_status")
+                        PostgresLoader.load(avgSpeedByStatus, "traffic_status_avg_speed")
+
                         // Agrégation par minute
                         if (enableMinuteAggregation) {
                             val aggMinute = TrafficStatsAggregator.aggregateByPeriodAndRoadName(batchDF, "minute")
