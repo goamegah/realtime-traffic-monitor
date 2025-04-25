@@ -4,17 +4,13 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 from streamlit_autorefresh import st_autorefresh
-from dataloader.data_loader import get_db_engine
+from dataloader.db_utils import run_query
 
 st.set_page_config(page_title="🏠 Home - Traffic Overview", layout="wide")
 st.title("🏠 Traffic Monitoring Dashboard")
 
-# Auto-refresh every 60 seconds
 st_autorefresh(interval=60 * 1000, key="home_refresh")
 
-engine = get_db_engine()
-
-# Load latest map features (only latest period)
 @st.cache_data(ttl=30)
 def load_home_data():
     query = """
@@ -22,7 +18,7 @@ def load_home_data():
         FROM road_traffic_feats_map
         WHERE period = (SELECT MAX(period) FROM road_traffic_feats_map)
     """
-    return pd.read_sql(query, engine)
+    return run_query(query)
 
 df = load_home_data()
 
@@ -41,7 +37,6 @@ col1.metric("🧩 Tronçons total", nb_segments)
 col2.metric("🛣️ Routes différentes", nb_routes)
 col3.metric("🚦 Statut dominant", status_dominant)
 
-# Répartition par statut de trafic
 st.markdown("## 🚦 Répartition des statuts de trafic")
 status_counts = df["traffic_status"].value_counts().reset_index()
 status_counts.columns = ["traffic_status", "count"]
@@ -58,6 +53,5 @@ chart = alt.Chart(status_counts).mark_bar().encode(
 
 st.altair_chart(chart, use_container_width=True)
 
-# Données tabulaires optionnelles
 with st.expander("🔍 Voir les données brutes"):
     st.dataframe(df, use_container_width=True)

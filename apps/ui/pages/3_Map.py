@@ -6,12 +6,12 @@ import folium
 from datetime import datetime
 from streamlit_folium import st_folium
 from streamlit_autorefresh import st_autorefresh
-from dataloader.data_loader import get_db_engine
+from data.data_loader import get_db_engine
 
 st.set_page_config(page_title="🗺️ Traffic Map", layout="wide")
 st.title("🗺️ Real-Time Traffic Map")
 
-# Rafraîchissement automatique toutes les 60 secondes
+# 🔄 Rafraîchissement automatique toutes les 60 secondes
 st_autorefresh(interval=60 * 1000, key="map_refresh")
 
 engine = get_db_engine()
@@ -32,7 +32,7 @@ if df.empty:
     st.warning("⚠️ Aucune donnée géographique disponible.")
     st.stop()
 
-# Filtres
+# 📌 Filtres
 with st.sidebar:
     st.header("🔎 Filtres")
     road_names = sorted(df["road_name"].dropna().unique())
@@ -41,20 +41,20 @@ with st.sidebar:
     selected_road_names = st.multiselect("🛣️ Road(s)", road_names, default=road_names)
     selected_statuses = st.multiselect("🚦 Statut(s) de trafic", traffic_statuses, default=traffic_statuses)
 
-# Filtrage
+# 📌 Filtrage
 filtered_df = df[
     (df["road_name"].isin(selected_road_names)) &
     (df["traffic_status"].isin(selected_statuses))
 ]
 
-# Résumé au-dessus de la carte
+# 📌 Résumé au-dessus de la carte
 latest_period = df["period"].max()
 st.markdown(f"""
 ### 🛰️ Mise à jour : `{latest_period.strftime('%Y-%m-%d %H:%M')}`  
 **🚗 Tronçons affichés :** {len(filtered_df)} / {len(df)}  
 """)
 
-# Couleurs par statut
+# 📌 Couleurs par statut
 STATUS_COLORS = {
     "freeFlow": "green",
     "heavy": "red",
@@ -67,7 +67,7 @@ STATUS_COLORS = {
 def get_color(status):
     return STATUS_COLORS.get(status, "blue")
 
-# Création de la carte
+# 🗺️ Création de la carte
 m = folium.Map(location=[48.1147, -1.6794], zoom_start=12, control_scale=True)
 
 for _, row in filtered_df.iterrows():
@@ -84,7 +84,7 @@ for _, row in filtered_df.iterrows():
     except Exception as e:
         st.error(f"Erreur sur la ligne {row['location_id']}: {e}")
 
-# Légende manuelle
+# 📌 Légende manuelle
 legend_html = """
 <div style='position: fixed; bottom: 60px; left: 60px; z-index: 1000; background: white; padding: 10px; border: 1px solid gray; border-radius: 5px;'>
 <b>🚦 Légende Trafic</b><br>
@@ -98,10 +98,10 @@ legend_html = """
 """
 m.get_root().html.add_child(folium.Element(legend_html))
 
-# Affichage de la carte
+# 📌 Affichage de la carte
 st.markdown("## 🧭 Carte des tronçons surveillés")
 st_folium(m, width=1000, height=600)
 
-# Données tabulaires optionnelles
+# 🗃️ Données tabulaires optionnelles
 with st.expander("🔍 Voir les données géographiques"):
     st.dataframe(filtered_df, use_container_width=True)
