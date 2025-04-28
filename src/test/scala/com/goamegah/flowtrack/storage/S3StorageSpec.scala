@@ -1,9 +1,4 @@
-<<<<<<< HEAD:src/test/scala/com/goamegah/trafficmonitor/storage/S3StorageSpec.scala
-26package com.goamegah.trafficmonitor.storage
-=======
 package com.goamegah.flowtrack.storage
->>>>>>> 9ef64451e790c267ec27f1da5ca3886fb5190246:src/test/scala/com/goamegah/flowtrack/storage/S3StorageSpec.scala
-
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
