@@ -12,7 +12,7 @@ services:
       POSTGRES_USER: ${DWH_POSTGRES_USR}
       POSTGRES_PASSWORD: ${DWH_POSTGRES_PWD}
       POSTGRES_DB: ${DWH_POSTGRES_DB}
-    #   Maps port 54320 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
+    #   Maps port 5432 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
     ports:
       - 5432:5432
     #   Restart the container if it fails.
