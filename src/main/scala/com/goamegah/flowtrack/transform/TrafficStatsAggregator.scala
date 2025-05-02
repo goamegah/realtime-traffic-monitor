@@ -105,4 +105,14 @@ object TrafficStatsAggregator {
                 F.collect_list("traffic_status").alias("traffic_status_list"),
             )
     }
+
+    def avgSpeedByStatus(df: DataFrame): DataFrame = {
+        df
+            .groupBy("traffic_status")
+            .agg(
+                F.avg("average_speed").alias("avg_speed"),
+                F.count(F.lit(1)).alias("record_count")
+            )
+            .orderBy("traffic_status")
+    }
 }
