@@ -1,3 +1,0 @@
-#!/bin/bash
-SBT_OPTS="-Xmx2G -XX:+UseG1GC -XX:ReservedCodeCacheSize=256m -Xss2m -Dfile.encoding=UTF-8"
-java $SBT_OPTS -jar `dirname $0`/sbt-launch.jar "$@"
