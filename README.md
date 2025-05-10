@@ -22,7 +22,6 @@ This project delivers a comprehensive real-time road traffic monitoring solution
 - **Scalable Architecture**  
   Designed to handle large-scale traffic data using containerized services with Docker.
 
----
 
 ## Architecture Overview
 1. **Data Sources**  
@@ -37,7 +36,6 @@ This project delivers a comprehensive real-time road traffic monitoring solution
 4. **Visualization**  
    A Streamlit-based dashboard provides real-time insights and visualizations.
 
----
 
 ## Technologies Used
 - **Programming Languages**: Scala, Python, SQL
@@ -46,7 +44,6 @@ This project delivers a comprehensive real-time road traffic monitoring solution
 - **Containerization**: Docker
 - **Build Tools**: SBT, pip
 
----
 
 ## Installation and Setup
 1. **Clone the Repository**  
